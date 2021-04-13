@@ -18,8 +18,9 @@ namespace GameCreator.Camera
             Variable
         }
 
-        [VariableFilter(Variable.DataType.GameObject)]
-        public VariableProperty myCameraMotor = new VariableProperty();
+        //[VariableFilter(Variable.DataType.GameObject)]
+        //public VariableProperty myCameraMotor = new VariableProperty();
+        public TargetGameObject target = new TargetGameObject();
 
         private CameraMotor NyCameraMotor;
         public bool mainCameraMotor = false;
@@ -31,7 +32,8 @@ namespace GameCreator.Camera
         public override bool InstantExecute(GameObject target, IAction[] actions, int index)
         {
 
-            CameraMotor test = myCameraMotor.Get(GetComponent<CameraMotor>());
+            // GameObject test = this.myCameraMotor.getgame
+            NyCameraMotor = target.gameObject.GetComponent<CameraMotor>();
 
             if (HookCamera.Instance != null)
             {
@@ -40,7 +42,7 @@ namespace GameCreator.Camera
                 {
                     CameraMotor motor = null;
                     if (this.mainCameraMotor) motor = CameraMotor.MAIN_MOTOR;
-                    else motor = this.test;
+                    else motor = this.NyCameraMotor;
 
                     if (motor != null)
                     {
