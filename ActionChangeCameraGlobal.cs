@@ -19,10 +19,9 @@ namespace GameCreator.Camera
         }
 
         [VariableFilter(Variable.DataType.GameObject)]
-        public VariableProperty resultantRoundedNumber = new VariableProperty();
+        public VariableProperty myCameraMotor = new VariableProperty();
 
         public bool mainCameraMotor = false;
-        public CameraMotor myCameraMotor;
 
         [Range(0.0f, 60.0f)]
         public float transistionTime = 0.0f;
@@ -38,7 +37,7 @@ namespace GameCreator.Camera
                 {
                     CameraMotor motor = null;
                     if (this.mainCameraMotor) motor = CameraMotor.MAIN_MOTOR;
-                    else motor = this.myCameraMotor;
+                    // else motor = this.myCameraMotor;
 
                     if (motor != null)
                     {
