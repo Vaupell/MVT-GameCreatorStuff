@@ -12,39 +12,30 @@ namespace GameCreator.Camera
     [AddComponentMenu("")]
     public class ActionChangeCameraGlobal : IAction
     {
-        public enum CameraMotorFrom
-        {
-            CameraMotor,
-            Variable
-        }
 
-        //[VariableFilter(Variable.DataType.GameObject)]
-        //public VariableProperty myCameraMotor = new VariableProperty();
-        public TargetGameObject target = new TargetGameObject();
+        // public TargetGameObject target = new TargetGameObject();
+        [VariableFilter(Variable.DataType.GameObject)]
+        public VariableProperty MyGlobalCam = new VariableProperty(Variable.VarType.GlobalVariable);
 
         private CameraMotor NyCameraMotor;
         public bool mainCameraMotor = false;
 
         [Range(0.0f, 60.0f)]
         public float transistionTime = 0.0f;
-        
-        public void Awake()
-        {
-            NyCameraMotor = target.gameObject.GetComponent<CameraMotor>();
-        }
 
-
-        public override bool InstantExecute(GameObject target, IAction[] actions, int index)
+         public override bool InstantExecute(GameObject target, IAction[] actions, int index)
         {
 
             if (HookCamera.Instance != null)
             {
+
                 CameraController cameraController = HookCamera.Instance.Get<CameraController>();
                 if (cameraController != null)
                 {
+
                     CameraMotor motor = null;
-                    if (this.mainCameraMotor) motor = CameraMotor.MAIN_MOTOR;
-                    else motor = this.NyCameraMotor;
+                    GameObject CamGO = this.MyGlobalCam.Get(target) as GameObject;
+                    if (CamGO != null) motor = CamGO.GetComponent<CameraMotor>();
 
                     if (motor != null)
                     {
