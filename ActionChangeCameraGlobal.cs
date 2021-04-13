@@ -27,13 +27,15 @@ namespace GameCreator.Camera
 
         [Range(0.0f, 60.0f)]
         public float transistionTime = 0.0f;
+        
+        public void Awake()
+        {
+            NyCameraMotor = target.gameObject.GetComponent<CameraMotor>();
+        }
 
 
         public override bool InstantExecute(GameObject target, IAction[] actions, int index)
         {
-
-            // GameObject test = this.myCameraMotor.getgame
-            NyCameraMotor = target.gameObject.GetComponent<CameraMotor>();
 
             if (HookCamera.Instance != null)
             {
