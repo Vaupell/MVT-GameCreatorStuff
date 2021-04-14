@@ -7,3 +7,5 @@ FindGameObjectAction.CS =  Finds a gameobject and stores it in global var list, 
 IgniterMVTKeyDown.cs = Trigger on Unity Input rather than hardcoded keys, allowing keys to be changed from player.
 
 ActionChangeCameraGlobal.cs = Select and use GC CameraMotor stored in GC global variables.
+
+MV_GCAttachCamera.cs = Attach Cameramotor when player is spawning in..
