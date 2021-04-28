@@ -11,7 +11,7 @@ namespace GameCreator.Core
         // localVariable Gameobject from somewhere where you want to store next target for this selection.
         // In my case on my NPC, i have local var list, with a localvariables component for the Waypoints.
         [VariableFilter(Variable.DataType.GameObject)]
-        public VariableProperty NextTarget = new VariableProperty(Variable.VarType.LocalVariable);
+        public VariableProperty NextTargetStorage = new VariableProperty(Variable.VarType.LocalVariable);
 
         // Tag name used for the waypoints.
         public string WayPointTag = "Waypoint";
