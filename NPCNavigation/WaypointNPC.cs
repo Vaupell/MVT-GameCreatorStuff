@@ -12,6 +12,9 @@ namespace GameCreator.Core
         // debug enable
         public bool myDebug = false;
 
+        // debug Allow 2 WPs for same NPC
+        public bool WpDublicatesAllowed = false;
+
         // localVariable Gameobject from somewhere where you want to store next target for this selection.
         // In my case on my NPC, i have local var list, with a localvariables component for the Waypoints.
         [VariableFilter(Variable.DataType.GameObject)]
@@ -35,10 +38,14 @@ namespace GameCreator.Core
         private int _tmpAttempts = 0;
         private int _index = 0;
         private GameObject _testTarget;
+        private int _oldTarget;
 
         public override bool InstantExecute(GameObject target, IAction[] actions, int index)
         {
+            if (_index != 0) _oldTarget = _index;
+
             //reset
+            RESET:
             _tmpAttempts = 0;
 
             // Grab waypoints from Globalstore
@@ -66,8 +73,25 @@ namespace GameCreator.Core
 
 
             SUCCES:
+
+            // check if waypoint is in Use.
+            if (ArrayScript.WpInUse[_index] == true)
+            {
+                // WP allready in use, RESET selection find a new WP
+                goto RESET;
+            }
+            else
+            {
+                // Set WP as in use.
+                ArrayScript.WpInUse[_index] = true;
+                // Set old WP as free
+                ArrayScript.WpInUse[_oldTarget] = false;
+            }
+
             return true;
         }
+
+
 
         // Find actual waypoint and store it.
         private bool FindNextWp()
