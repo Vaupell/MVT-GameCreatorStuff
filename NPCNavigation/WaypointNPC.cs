@@ -72,20 +72,24 @@ namespace GameCreator.Core
             }
 
 
-            SUCCES:
+        SUCCES:
 
-            // check if waypoint is in Use.
-            if (ArrayScript.WpInUse[_index] == true)
+            //Dublicate waypoints !not allowed
+            if (WpDublicatesAllowed == false)
             {
-                // WP allready in use, RESET selection find a new WP
-                goto RESET;
-            }
-            else
-            {
-                // Set WP as in use.
-                ArrayScript.WpInUse[_index] = true;
-                // Set old WP as free
-                ArrayScript.WpInUse[_oldTarget] = false;
+                // check if waypoint is in Use.
+                if (ArrayScript.WpInUse[_index] == true)
+                {
+                    // WP allready in use, RESET selection find a new WP
+                    goto RESET;
+                }
+                else
+                {
+                    // Set WP as in use.
+                    ArrayScript.WpInUse[_index] = true;
+                    // Set old WP as free
+                    ArrayScript.WpInUse[_oldTarget] = false;
+                }
             }
 
             return true;
