@@ -30,7 +30,7 @@ namespace GameCreator.Core
 
 
         // MaxRange of next target
-        public float NxtTargetMaxRange = 5f;
+        public float NxtTargetMaxRange = 25f;
         // MaxAttempts to find before continue
         public int MaxAttempts = 5;
 
